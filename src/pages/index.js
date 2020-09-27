@@ -3,6 +3,7 @@ import Banner from "../components/Banner";
 import Layout from "../components/Layout";
 import About from "../components/Home/About";
 import Services from "../components/Home/Services";
+import FeaturedTours from "../components/Home/FeaturedTours";
 import Hero from "../components/Hero";
 import { graphql } from "gatsby";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
@@ -19,7 +20,7 @@ export const query = graphql`
     }
 `;
 
-export default function Home({ data }) {
+const Home = ({data}) => {
     const {
         img: {
             childImageSharp: { fluid },
@@ -39,6 +40,9 @@ export default function Home({ data }) {
             </Hero>
             <About />
             <Services />
+            <FeaturedTours />
         </Layout>
     );
 }
+
+export default Home;

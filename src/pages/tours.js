@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import Hero from "../components/Hero";
 import { graphql } from "gatsby";
-
+import Tours from '../components/Tours/Tours'
 export const query = graphql`
     {
         img: file(relativePath: { eq: "defaultBcg.jpeg" }) {
@@ -23,7 +23,8 @@ const tours = ({ data }) => {
     } = data;
     return (
         <Layout>
-            <Hero img={fluid}></Hero>
+            <Hero img={fluid}/>
+            <Tours />
         </Layout>
     );
 };
