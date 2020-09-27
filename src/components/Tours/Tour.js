@@ -5,9 +5,23 @@ import { FaMap } from "react-icons/fa";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 import PropTypes from "prop-types";
 
+
+const defaultImage = graphql`
+{
+  img: file(relativePath: {eq: "defaultBcg.jpeg"}) {
+    childImageSharp {
+      fluid(maxWidth: 600) {
+        ...GatsbyImageSharpFluid_tracedSVG
+      }
+    }
+  }
+}`;
+
 const Tour = ({ tour }) => {
+  const {img:{childImageSharp:{fluid}}} = defaultImage;
     const { name, price, country, days, slug, images } = tour;
-    let mainImage = images[0].fluid;
+
+    let mainImage = images? images[0].fluid : fluid
     return (
         <article className={styles.tour}>
             <div className={styles.imgContainer}>
