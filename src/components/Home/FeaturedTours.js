@@ -3,37 +3,34 @@ import Title from "../Title";
 import styles from "../../css/items.module.css";
 import Tour from "../Tours/Tour";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
-import { useStaticQuery, graphql } from "gatsby";
 
-const featuredTours = graphql`
-    {
-        featuredTours: allContentfulTour(filter: { featured: { eq: true } }) {
-            tours: nodes {
-                name
-                slug
-                price
-                country
-                days
-                contentful_id
-                images {
-                    fluid {
-                        ...GatsbyContentfulFluid_tracedSVG
-                    }
-                }
-            }
-        }
-    }
-`;
+// const featuredTours = graphql`
+//     {
+//         featuredTours: allContentfulTour(filter: { featured: { eq: true } }) {
+//             tours: nodes {
+//                 name
+//                 slug
+//                 price
+//                 country
+//                 days
+//                 contentful_id
+//                 images {
+//                     fluid {
+//                         ...GatsbyContentfulFluid_tracedSVG
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// `;
 
-const FeaturedTours = () => {
-    const {
-        featuredTours: { tours },
-    } = useStaticQuery(featuredTours);
+const FeaturedTours = ({ tours }) => {
+    const featured = tours.featuredTours;
     return (
         <section className={styles.tours}>
             <Title title="featured" subtitle="tours" />
             <div className={styles.center}>
-                {tours.map(tour => {
+                {featured.map(tour => {
                     return <Tour key={tour.contentful_id} tour={tour} />;
                 })}
             </div>

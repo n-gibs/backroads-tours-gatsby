@@ -4,13 +4,13 @@ import styles from "../../css/tour.module.css";
 import { FaMap } from "react-icons/fa";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 import PropTypes from "prop-types";
-
+import {useStaticQuery, graphql } from 'gatsby';
 
 const defaultImage = graphql`
 {
   img: file(relativePath: {eq: "defaultBcg.jpeg"}) {
     childImageSharp {
-      fluid(maxWidth: 600) {
+      fluid {
         ...GatsbyImageSharpFluid_tracedSVG
       }
     }
@@ -18,7 +18,7 @@ const defaultImage = graphql`
 }`;
 
 const Tour = ({ tour }) => {
-  const {img:{childImageSharp:{fluid}}} = defaultImage;
+  const {img:{childImageSharp:{fluid}}} = useStaticQuery(defaultImage);
     const { name, price, country, days, slug, images } = tour;
 
     let mainImage = images? images[0].fluid : fluid

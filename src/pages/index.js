@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import Banner from "../components/Banner";
 import Layout from "../components/Layout";
 import About from "../components/Home/About";
@@ -10,25 +10,35 @@ import AniLink from "gatsby-plugin-transition-link/AniLink";
 
 export const query = graphql`
     {
-        img: file(relativePath: { eq: "defaultBcg.jpeg" }) {
+        defaultBcg: file(relativePath: { eq: "defaultBcg.jpeg" }) {
             childImageSharp {
-                fluid(quality: 90, maxWidth: 600) {
+                fluid(quality: 90, maxWidth: 4160) {
                     ...GatsbyImageSharpFluid_withWebp
+                }
+            }
+        }
+        tours: allContentfulTour(filter: { featured: { eq: true } }) {
+            featuredTours:nodes {
+                name
+                price
+                slug
+                country
+                contentful_id
+                days
+                images {
+                    fluid {
+                        ...GatsbyContentfulFluid
+                    }
                 }
             }
         }
     }
 `;
 
-const Home = ({data}) => {
-    const {
-        img: {
-            childImageSharp: { fluid },
-        },
-    } = data;
+export default memo(({ data }) => {
     return (
         <Layout>
-            <Hero home="true" img={fluid}>
+            <Hero home="true" img={data.defaultBcg.childImageSharp.fluid}>
                 <Banner
                     title="continue Exploring"
                     info="Cray locavore ramps mlkshk, four loko twee bushwick. Small batch banjo butcher man bun vegan chartreuse. Gentrify yr pinterest bitters art party tattooed. "
@@ -40,9 +50,7 @@ const Home = ({data}) => {
             </Hero>
             <About />
             <Services />
-            <FeaturedTours />
+            <FeaturedTours tours={data.tours} />
         </Layout>
     );
-}
-
-export default Home;
+});
