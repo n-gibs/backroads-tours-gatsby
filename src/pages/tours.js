@@ -1,12 +1,31 @@
-import React from 'react'
-import Layout from '../components/Layout'
+import React from "react";
+import Layout from "../components/Layout";
+import Hero from "../components/Hero";
+import { graphql } from "gatsby";
 
-const tours = () => {
-  return (
-    <Layout>
-      tours page
-    </Layout>
-  )
-}
+export const query = graphql`
+    {
+        img: file(relativePath: { eq: "defaultBcg.jpeg" }) {
+            childImageSharp {
+                fluid(quality: 90, maxWidth: 600) {
+                    ...GatsbyImageSharpFluid_withWebp
+                }
+            }
+        }
+    }
+`;
 
-export default tours
+const tours = ({ data }) => {
+    const {
+        img: {
+            childImageSharp: { fluid },
+        },
+    } = data;
+    return (
+        <Layout>
+            <Hero img={fluid}></Hero>
+        </Layout>
+    );
+};
+
+export default tours;
