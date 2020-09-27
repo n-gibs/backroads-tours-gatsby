@@ -1,3 +1,6 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/939ef57a-dce7-4a2d-af11-7108d887b066/deploy-status)](https://app.netlify.com/sites/backroads-tours-demo/deploys)
+
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.com">
