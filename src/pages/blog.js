@@ -1,32 +1,29 @@
-import React from 'react'
-import Layout from '../components/Layout'
+import React from "react";
+import Layout from "../components/Layout";
 import Hero from "../components/Hero";
 import { graphql } from "gatsby";
+import SEO from "../components/SEO";
+import Blog from "../components/Blog/Blog";
 
+const blogs = ({ data }) => {
+    return (
+        <Layout>
+            <SEO title="Blog" />
+            <Hero img={data.bcg.childImageSharp.fluid} />
+            <Blog />
+        </Layout>
+    );
+};
 export const query = graphql`
-    {
-        img: file(relativePath: { eq: "blogBcg.jpeg" }) {
+    query {
+        bcg: file(relativePath: { eq: "blogBcg.jpeg" }) {
             childImageSharp {
-                fluid(quality: 90, maxWidth: 600) {
-                    ...GatsbyImageSharpFluid_withWebp
+                fluid(maxWidth: 1600) {
+                    ...GatsbyImageSharpFluid
                 }
             }
         }
     }
 `;
 
-const blog = ({ data }) => {
-    const {
-        img: {
-            childImageSharp: { fluid },
-        },
-    } = data;
-
-    return (
-        <Layout>
-            <Hero img={fluid}></Hero>
-        </Layout>
-    );
-};
-
-export default blog;
+export default blogs;

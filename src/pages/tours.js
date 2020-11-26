@@ -3,6 +3,9 @@ import Layout from "../components/Layout";
 import Hero from "../components/Hero";
 import { graphql } from "gatsby";
 import Tours from '../components/Tours/Tours'
+import SEO from "../components/SEO"
+
+
 export const query = graphql`
     {
         img: file(relativePath: { eq: "defaultBcg.jpeg" }) {
@@ -23,6 +26,7 @@ const tours = ({ data }) => {
     } = data;
     return (
         <Layout>
+            <SEO title="tours" />
             <Hero img={fluid}/>
             <Tours />
         </Layout>

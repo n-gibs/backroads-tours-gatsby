@@ -7,6 +7,8 @@ import FeaturedTours from "../components/Home/FeaturedTours";
 import Hero from "../components/Hero";
 import { graphql } from "gatsby";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
+import SEO from "../components/SEO"
+
 
 export const query = graphql`
     {
@@ -38,13 +40,14 @@ export const query = graphql`
 export default memo(({ data }) => {
     return (
         <Layout>
+              <SEO title="Home" />
             <Hero home="true" img={data.defaultBcg.childImageSharp.fluid}>
                 <Banner
                     title="continue Exploring"
                     info="Cray locavore ramps mlkshk, four loko twee bushwick. Small batch banjo butcher man bun vegan chartreuse. Gentrify yr pinterest bitters art party tattooed. "
                 >
                     <AniLink fade to="/tours" className="btn-white">
-                        explore things
+                        explore tours
                     </AniLink>
                 </Banner>
             </Hero>
